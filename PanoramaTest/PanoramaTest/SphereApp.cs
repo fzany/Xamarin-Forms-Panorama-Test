@@ -22,6 +22,8 @@ namespace PanoramaTest
 		float pitch;
 		float roll;
 		const float Sensitivity = .05f;
+		const float Sensitivity2 = 100f;
+
 		Node cameraNode;
 
 		public SphereApp(ApplicationOptions options) : base(options)
@@ -81,11 +83,11 @@ namespace PanoramaTest
 
 		void ControlScene(float X, float Y, float Z)
         {
-			yaw += X;
-			pitch += Y;
-			pitch = MathHelper.Clamp(pitch, -90, 90);
-			roll = Z;
-			cameraNode.Rotation = new Quaternion(-pitch, -yaw, roll);
+			yaw = Sensitivity2*X;
+			pitch = Sensitivity2*Y;
+			//pitch = MathHelper.Clamp(pitch, -90, 90);
+			roll = 0;// Sensitivity2*Z;
+			cameraNode.Rotation = new Quaternion(-pitch, yaw, roll);
 		}
 
 		private void ToggleAll()
